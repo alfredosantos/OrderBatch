@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileReader;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class CSVFileUtils {
 
   public List<Orders> listOrders(String file) throws Exception {

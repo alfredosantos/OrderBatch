@@ -16,7 +16,7 @@ public class MainClass {
 
     System.out.println("OrderBatch " + file);
 
-    new CalculateCommission().calculate("orders.csv");
+    new CalculateCommission().calculate(file);
 
   }
 }

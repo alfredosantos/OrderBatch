@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class CalculateCommission {
 
+  private Map<String, Double> sum;
+
   public void calculate(String file) throws Exception {
 
     final CSVFileUtils cSVFileUtils = new CSVFileUtils();
@@ -23,7 +25,7 @@ public class CalculateCommission {
       ordersList.remove(0);
     }
 
-    Map<String, Double> sum = ordersList.stream().collect(
+    sum = ordersList.stream().collect(
         Collectors.groupingBy(Orders::getBoutique_ID,
             Collectors.summingDouble(Orders::getTotalOrderPrice)));
 

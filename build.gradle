@@ -4,9 +4,21 @@ plugins {
 
 group 'OrderBatch'
 
-version = '1.0'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
+sourceSets.main.java.srcDirs = ['src']
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar OrderBatch',
+                'Main-Class': 'main.java.MainClass'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
 
 //Get dependencies from Maven central repository
 repositories {
@@ -15,21 +27,6 @@ repositories {
 
 //Project dependencies
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
+    compile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'com.opencsv', name: 'opencsv', version: '4.6'
-
-}
-
-sourceSets.main.java.srcDirs = ['src']
-
-jar {
-    manifest {
-        attributes(
-                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                'Main-Class': 'main.java.MainClass'
-        )
-        baseName = project.name + '-all'
-        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    }
 }
