@@ -1,8 +1,8 @@
-package main.java;
+package br.com.orderbatch;
 
 import com.opencsv.bean.CsvBindByPosition;
 
-public class Orders {
+public class Order {
 
   @CsvBindByPosition(position = 0)
   public String Boutique_ID;
